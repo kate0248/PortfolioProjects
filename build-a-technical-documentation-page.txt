@@ -1,0 +1,236 @@
+** start of undefined **
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="styles.css" />
+<head>
+  <title>Basics of SQL for Absolute Beginners</title>
+  <!--<header><h1>Basics of SQL for Absolute Beginners</h1></header> -->
+</head>
+<main id="main-doc">
+<div id="navbar_div">
+<nav id="navbar">
+  <header><h2>Basics of SQL</h2></header>
+  <a class="nav-link" href="#What_is_SQL?">What is SQL?</a><hr/>
+  <a class="nav-link" href="#Downloading_SQL_and_SMSS">Downloading SQL and SMSS</a><hr/>
+  <a class="nav-link" href="#Create_Table">Create Table</a><hr/>
+  <a class="nav-link" href="#Selecting_Data">Selecting Data</a><hr/>
+  <a class="nav-link" href="#Where_Statements">Where Statements</a><hr/>
+  <a class="nav-link" href="#Like_Statements">Like Statements</a><hr/>
+  <a class="nav-link" href="#Searching_for_Null_(Empty)_Values">Searching for Null (Empty) Values</a><hr/>
+  <a class="nav-link" href="#In_Statements">In Statements</a><hr/>
+  <a class="nav-link" href="#Group_By">Group By</a><hr/>
+  <a class="nav-link" href="#Order_By">Order By</a><hr/>
+</nav>
+</div>
+<body>
+<div>
+<section class="main-section" id="What_is_SQL?">
+  <header><h3>What is SQL?</h3></header>
+  <p>SQL stands for "Structured Query Language". It is used to query, or manipulate and reference, large tables of data (databases) and is often used with Microsoft's SQL Server Management Studio (SMSS).</p>
+</section>
+<section class="main-section" id="Downloading_SQL_and_SMSS">
+  <header><h3>Downloading SQL and SMSS</h3></header>
+  <p>You will need to download Microsoft's SQL Server Management Studio (SMSS) and an SQL Server. Both are free as long as you use the Express version. Please use the following links below to download and visit <a href="https://www.youtube.com/@AlexTheAnalyst">Alex the Analyst's YouTube channel</a> for more detailed instructions: (Note: This is not my original content, the source of the information on this page is my notes from the SQL Beginner Tutorial four-video series on <a href="https://www.youtube.com/@AlexTheAnalyst">Alex the Analyst's YouTube channel</a> and this page includes my notes on his tutorials).</p>
+  <ul>
+    <li>SQL Server Management Studio: <a href="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqblFKR0FSc0EwbzNYdGlUY0ZKb3g0S3pORUhKQXxBQ3Jtc0tsZzFIbUZhSVZjd3Q1ZnJMMnVaU1RudThSUkFCaEptWjlGdF93ZFY2TTNoWDlOYW85dkRHazRjMF9FNVQ2TTJrblVyWlpITV9sWWt3Vi0zaTFJczZUSEpROFZIVkt0Q04zSXVzdzhMZlRPeDZ2d2lmUQ&q=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fsql%2Fssms%2Fdownload-sql-server-management-studio-ssms%3Fview%3Dsql-server-ver15&v=RSlqWnP-Dy8">Click Here</a></li>
+    <li>SQL Server: <a href="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3psWGUtZGV3YWxaY3ZKLTdTNVRxQmxqWVA2QXxBQ3Jtc0traGNCNXExRURVZk0yNnB4YmlNOUM4T2pQMnZSb0pJSnBURDJMRUVDdEhlMGliNHozeWx3NDdIM3dlMDF1VENGdlFKWTZRRVRCMFg3bk80TndPbVhEUktBYmNQRnpjT0pkVkZFdlVHdjFMZWhLbWlZaw&q=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fsql-server%2Fsql-server-downloads&v=RSlqWnP-Dy8">Click Here</a></li>
+    <li>extra</li>
+    <li>extra</li>
+    <li>extra</li>
+  </ul>
+</section>
+<section class="main-section" id="Create_Table">
+  <header><h3>Create Table</h3></header>
+  <p>In order to create your own table from scratch in SMSS, you need to first create an empty table and then add data to it. Here is an example for a table named "Employee Demographics". You need to name each column and then the data type for that column. Data type "int" is commonly used for whole numbers, but if you need to use decimals you should use "float" instead.  Text input can usually be used with "varchar(50)". </p> <div class="code_div"><p><code>CREATE TABLE EmployeeDemographics<br>
+    (EmployeeID int,<br>
+    FirstName varchar(50),<br>
+    LastName varchar(50),<Br>
+    Age int,<br>
+    Gender varchar(50)
+    )</code></p></div>
+    <p>Now you need to manually enter the data into your table. If you want to import data from an Excel, csv, or text file, please visit Alex's channel and check out his SQL Portfolio Project 1. If you have a newer version of SMSS you may not have the same bug that he ran into, but may need to import files as .csv or .txt instead of .xls. You have to insert the value for each column in the same order that you made the columns above. Make sure to put text, aka varchar(50), input in quotes.There are 2 tables used in this tutorial but we will just give one example here.
+      <div class="code_div"><p><code>INSERT INTO EmployeeDemographics VALUES<br>
+        (1001, 'Jim', 'Halpert', 30, 'Male'),<br>
+        (1002, 'Pam', 'LastName', 30, 'Female')</code></p></div>
+</section>
+<section class="main-section" id="Selecting_Data">
+  <header><h3>Selecting Data</h3></header>
+  <p>Use SQL queries to select the data you want to see. The * sign selects the entire table.</p>
+  <div class="code_div">
+    <p><code>
+      SELECT *<br>
+      FROM EmployeeDemographics
+      </code></p></div>
+  <p>You can use column names to select any column(s) you want, using a comma to separate columns. You can also select the top 5, 100, or any number of rows using Top5* or select only the distinct values from a column using DISTINCT(ColumnName).</p>
+  <div class="code_div">
+    <p><code>
+      SELECT FirstName<br>
+      FROM EmployeeDemographics<br>
+      SELECT FirstName, LastName<br>
+      FROM EmployeeDemographics<br>
+      SELECT TOP 5*<br>
+      FROM EmployeeDemographics<br>
+      SELECT DISTINCT (EmployeeID)<br>
+      FROM EmployeeDemographics
+      </code></p></div>
+    <p>To count how many values are in a column, excluding null values, use the SELECT command with COUNT. It's not required but you can use AS to give your new column a name.</p>
+    <div class="code_div">
+      <p><code>
+        SELECT COUNT(LastName) AS LastNameCount<br>
+        FROM EmployeeDemographics
+      </code></p>
+    </div>
+    <p>You can also use SELECT to show minimums, maximums, and average mean.</p>
+      <div class="code_div">
+      <p><code>
+        SELECT MAX(Salary)<br>
+        FROM EmployeeSalary
+      </code></p>
+      </div>
+    <p>To access table from a different database, specify the database name, then .dbo, then the table name. Instead of ".dbo" you can use ".." as a shorthand. Avoid using spaces in database names since this can cause issues when you try to access those databases.</p>
+    <div class="code_div">
+      <p><code>
+        SELECT *<br>
+        FROM SQLTutorial.dbe.EmployeeSalary
+      </code></p>
+      </div>
+</section>
+<section class="main-section" id="Where_Statements">
+  <header><h3>Where Statements</h3></header>
+  <p>Where statements help you limit the amount of data in your view and specify the data you want returned. Operaters include <> does not equal, > greater than, < less than, >= greater than or equal to, <= less than or equal to. You can use more than one criteria by combining with AND or OR.</p>
+  <div class="code_div">
+      <p><code>
+        SELECT *<br>
+        FROM EmployeeDemographics<br>
+        WHERE FirstName='Jim'<br>
+        --Selecting by more than one criteria (note that -- is used to comment out code in SQL)<br>
+        SELECT *<br>
+        FROM EmployeeDemographics<br>
+        WHERE Age <=32 AND Gender='Male'
+      </code></p>
+    </div>
+</section>
+<section class="main-section" id="Like_Statements">
+  <header><h3>Like Statements</h3></header>
+  <p>LIKE statements are used with WHERE and allow you to search for a certain value by using the name, and % as a wildcard.</p>
+  <div class="code_div">
+      <p><code>
+        SELECT *<br>
+        FROM EmployeeDemographics<br>
+        WHERE FirstName LIKE '%Ji%'<br>
+      </code></p>
+  </div>
+</section>
+<section class="main-section" id="Searching_for_Null_(Empty)_Values">
+  <header><h3>Searching for Null (Empty) Values</h3></header>
+  <p>You can search for null values using a WHERE statement with IS NULL or for values that are not null using IS NOT NULL.</p>
+  <div class="code_div">
+      <p><code>
+        SELECT *<br>
+        FROM EmployeeDemographics<br>
+        WHERE FirstName IS NULL<br>
+      </code></p>
+    </div>
+</section>
+<section class="main-section" id="In_Statements">
+  <header><h3>In Statements</h3></header>
+  <p>IN is like using a = within a WHERE statement, but you can use as many different search values as you want. You could do this with = but you would need to combine multiple = statements with AND.</p>
+  <div class="code_div">
+    <p><code>
+      SELECT *<br>
+      FROM EmployeeDemographics<br>
+      WHERE FirstName IN ('Jim', 'Michael')
+      </code>
+    </div>
+  </section>
+<section class="main-section" id="Group_By">
+  <header><h3>Group By</h3></header>
+  <p> GROUP BY lets you roll all rows that you select with the FROM command into one. </p>
+  <div class="code_div"><p><code>
+    SELECT *<br>
+    FROM EmployeeDemographics<br>
+    GROUP BY Gender<br>
+    </code></p>
+  </div>
+  <p>You can also create a count to count how many items fall into that group. Use AS to give your count column a name.</p>
+  <div class="code_div">
+    <p><code>
+      SELECT Gender, COUNT(Gender) AS Count_Gender<br>
+      FROM EmployeeDemographics<br>
+      GROUP BY Gender
+    </code></p>
+  </div>
+  <p>You can add another criteria using a WHERE statement, for example group by gender for everyone who is over 31.
+    <div class="code_div">
+      <p><code>
+        SELECT Gender, COUNT(Gender) AS Count_Gender<br>
+        FROM EmployeeDemographics<br>
+        WHERE Age > 31<br>
+        GROUP BY Gender
+      </code></p>
+    </div>
+  </section>
+<section class="main-section" id="Order_By">
+  <header><h3>Order By</h3></header>
+  <p>ORDER BY allows you to designate a column to order all the rows by. It can be either alphabetical or numerical order, and the default is ascending order but you can add DESC to put rows in descending order.</p>
+  <div class="code_div">
+    <p><code>
+      SELECT EmployeeID, JobTitle, Salary<br>
+      FROM SQLTutorial.dbo.EmployeeSalary<br>
+      ORDER BY EmployeeID  DESC
+    </code></p>
+  </div>
+  </section>
+</div>
+</body>
+</main>
+<html>
+
+** end of undefined **
+
+** start of undefined **
+
+#navbar_div {
+  min-width: 150px;
+  max-width: 25%;
+  align: left;
+  height: 300px;
+  background-color: white;
+  font-family: aerial, sans-serif;
+  /*--border-right: 2px solid grey;--*/
+}
+main {
+  display: flex;
+  font-family: aerial, sans-serif;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  border-left: 2px solid grey;
+}
+.nav-link {
+  color: grey;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+}
+
+p {
+  text-align: justify;
+}
+.code_div {
+  background-color: #E8E8E8;
+}
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+** end of undefined **
+
